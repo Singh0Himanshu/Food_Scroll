@@ -2,6 +2,8 @@ const userModel = require('../models/user.model')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+
+
 async function registerUser(req,res){
     const {fullName,email,password} = req.body;
 
@@ -18,12 +20,13 @@ async function registerUser(req,res){
     const hashedPassword = await bcrypt.hash(password,10);
 
     const user = await userModel.create({
-        fullName,email,hashedPassword
+        fullName,email,
+        password:hashedPassword
     })
 
     const token = jwt.sign({
         id:user._id,
-    },"pAyqRwsX4TPY0RPcDUwTp0DFKewURCV262ZPPE5wkwll6PsD5pYcuukRuagzUfq8R2iZUV5KUjxBBFQ7fwKlfKY2TLOh2oB189PB1JQTxs3uZ7xu4zx6rhG9blh");
+    },process.env.JWT_SECRET_KEY);
 
     res.cookie("token",token)
 
@@ -37,8 +40,49 @@ async function registerUser(req,res){
     })
 }
 
-const login = ()=>{}
+async function loginUser(req,res){
+    const {email,password} = req.body;
+
+    const user = await userModel.findOne({email});
+
+    console.log(user)
+
+    if(!user){
+        return res.status(400).json({
+            error:"wrong email or password"
+        })
+    }
+
+    console.log(password,user.password)
+    const isPasswordValid = await bcrypt.compare(password,user.password)
+    
+
+    if(!isPasswordValid){
+        return res.status(400).json({
+            error:"wrong email or password"
+        })
+    }
+
+    const token = jwt.sign({
+        id : user._id,
+    },process.env.JWT_SECRET_KEY)
+
+    res.cookie("token",token);
+
+    res.status(200).json({
+        message:"user logged in successfully",
+        user:user,
+    })
+
+}
+
+async function logout(req,res){
+    res.clearCookie("token")
+    res.status(200).json({
+        message:"user logged out successfully"
+    })
+}
 
 module.exports = {
-    registerUser
+    registerUser,loginUser,logout
 }
