@@ -8,5 +8,6 @@ router.post('/user/login',authController.loginUser);
 router.get('/user/logout',authController.logout);
 router.post('/user/registerFoodpartener',authController.registerFoodPartner);
 router.post('/user/loginFoodpartener',authController.loginFoodPartener);
+router.get('/user/logoutFoodpartener',authController.logoutFoodPartener);
 
 module.exports = router;
