@@ -116,6 +116,7 @@ async function registerFoodPartner(req,res){
     res.status(200).json({
         message:"User registered successfully",
         user:{
+            name:foodPartner.name,
             _id:foodPartner._id,
             email:foodPartner.email,
             phone:foodPartner.phone,

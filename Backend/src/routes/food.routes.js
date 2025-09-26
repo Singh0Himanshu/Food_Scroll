@@ -11,5 +11,6 @@ const upload = multer({
 
 //routes for food
 router.post('/',authMiddleware.authFoodPartnerMiddleware,upload.single("video"),foodcontroller.createFood)
+router.get('/',authMiddleware.authUserMiddleware,foodcontroller.getFoodItems)
 
 module.exports = router;
