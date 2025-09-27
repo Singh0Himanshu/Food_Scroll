@@ -6,13 +6,14 @@ const foodRoutes = require('./routes/food.routes')
 const cors = require('cors')
 
 const app = express();
+
 app.use(express.json());
 app.use(cookieParser());
-
 app.use(cors({
-    origin:"http://localhost:5173",
-    Credential:true
-}))
+  origin: "http://localhost:5173", // frontend origin
+  credentials: true,              // allow cookies, authorization headers
+}));
+
 
 connectDB();
 
