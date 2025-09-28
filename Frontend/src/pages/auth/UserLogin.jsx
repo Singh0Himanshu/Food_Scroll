@@ -19,8 +19,7 @@ const UserLogin = () => {
     }, { withCredentials: true });
 
     console.log(response.data);
-
-    navigate("/"); // Redirect to home after login
+    navigate("/"); 
 
   };
 
