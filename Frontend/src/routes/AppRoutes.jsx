@@ -7,6 +7,7 @@ import FoodPartnerRegister from '../pages/auth/FoodPartnerRegister'
 import FoodPartnerLogin from '../pages/auth/FoodPartnerLogin'
 import BottomNav from '../components/BottomNav'
 import Home from '../pages/general/Home'
+import CreateFood from '../pages/food-partner/createFood'
 
 const AppRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const AppRoutes = () => {
             <Route path="/food-partner/register" element={<FoodPartnerRegister/>} />
             <Route path="/food-partner/login" element={<FoodPartnerLogin/>} />
             <Route path="/" element={<><Home/><BottomNav/></>} />
+            <Route path="/create-food" element={<CreateFood/>} />
         </Routes>
     </Router>
   )
