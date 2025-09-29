@@ -6,6 +6,7 @@ import UserLogin from '../pages/auth/UserLogin'
 import FoodPartnerRegister from '../pages/auth/FoodPartnerRegister'
 import FoodPartnerLogin from '../pages/auth/FoodPartnerLogin'
 import BottomNav from '../components/BottomNav'
+import Home from '../pages/general/Home'
 
 const AppRoutes = () => {
   return (
@@ -16,7 +17,7 @@ const AppRoutes = () => {
             <Route path="/user/login" element={<UserLogin/>} />
             <Route path="/food-partner/register" element={<FoodPartnerRegister/>} />
             <Route path="/food-partner/login" element={<FoodPartnerLogin/>} />
-            <Route path="/" element={<BottomNav/>} />
+            <Route path="/" element={<><Home/><BottomNav/></>} />
         </Routes>
     </Router>
   )
